@@ -2,20 +2,25 @@ class Solution {
 public:
     int jump(vector<int>& nums) {
         int n = nums.size();
-        vector<int> v(n, 0);
-        for (int i = 0; i < n; i++) {
-            if (i) {
-                v[i] = max(nums[i] + i, v[i - 1]);
-            } else {
-                v[i] = nums[i] + i;
-            }
-        }
+        // vector<int> v(n, 0);
         int jumps = 0;
         int curr_idx = 0;
-        while (curr_idx < n - 1) {
-            curr_idx = v[curr_idx];
-            jumps++;
+        int mx = 0;
+        for (int i = 0; i < n; i++) {
+            if (i) {
+                mx = max(nums[i] + i, mx);
+            } else {
+                mx = nums[i] + i;
+            }
+            if (curr_idx >= n - 1) {
+                return jumps;
+            }
+            if (i == curr_idx) {
+                curr_idx = mx;
+                jumps++;
+            }
         }
+
         return jumps;
     }
 };
