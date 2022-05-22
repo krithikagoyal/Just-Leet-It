@@ -2,17 +2,21 @@ class Solution {
 public:
     int rob(vector<int>& nums) {
         int n = nums.size();
-        vector<int> dp(n, 0);
+        vector<int> dp(3, 0);
         int mx = 0;
         for (int i = n - 1; i >= 0; i--) {
-            dp[i] = nums[i];
+            int val = nums[i];
+            // dp[i] = nums[i];
             if (i + 2 < n) {
-                dp[i] = max(nums[i] + dp[i + 2], dp[i]);
+                val = max(nums[i] + dp[1], val);
             }
             if (i + 3 < n) {
-                dp[i] = max(nums[i] + dp[i + 3], dp[i]);
+                val = max(nums[i] + dp[2], val);
             }
-            mx = max(dp[i], mx);
+            dp[2] = dp[1];
+            dp[1] = dp[0];
+            dp[0] = val;
+            mx = max(val, mx);
         }
         return mx;
     }
