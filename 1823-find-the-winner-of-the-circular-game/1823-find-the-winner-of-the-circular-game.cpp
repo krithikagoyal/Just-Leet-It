@@ -6,9 +6,10 @@ public:
             q.push(i + 1);
         
         while (n > 1) {
-            int num = k % n; // num = 2
-            if (num == 0) 
-                num = n;
+            // int num = k % n; // num = 2
+            // if (num == 0) 
+            //     num = n;
+            int num = k;
             n--;
             for (int i = 0; i < num - 1; i++) {
                 int val = q.front();
