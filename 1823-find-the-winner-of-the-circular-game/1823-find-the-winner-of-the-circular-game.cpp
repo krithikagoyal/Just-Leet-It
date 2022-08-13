@@ -1,25 +1,24 @@
 class Solution {
 public:
     int findTheWinner(int n, int k) {
-        queue<int> q;
-        for (int i = 0; i < n; i++)
-            q.push(i + 1);
-        
-        while (n > 1) {
-            // int num = k % n; // num = 2
-            // if (num == 0) 
-            //     num = n;
-            int num = k;
-            n--;
-            for (int i = 0; i < num - 1; i++) {
-                int val = q.front();
-                q.pop();
-                q.push(val);
-                // cout << val << " " << n << " " << q.front() << endl;
+        int ans = 1;
+        for (int i = 2; i <= n; i++) {
+            int num = k % i;
+            if (num == 0)
+                num = i;
+            int start = num + 1;
+            if (start == i + 1)
+                start = 1;
+            if (start > num)
+                start--;
+            ans = ((start - 1) + ans) % (i - 1);
+            if (ans == 0)
+                ans = i - 1;
+            if (ans >= num) {
+                ans++;
             }
-            q.pop();
-        } // 5, 1 2 3 4 5, 3 4 5 1, 5 1 3, 3 5
-        
-        return q.front();
+            // cout << i << " " << ans << endl;
+        } // 
+        return ans;
     }
 };
